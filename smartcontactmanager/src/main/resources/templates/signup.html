@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>This is Home Page</title>
+</head>
+<body>
+<section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+
+       <div class="my-card mt-2">
+<!--           <div th:if=${session.message} th:classappend="${session.message.type}" class="alert " role="alert">-->
+<!--             <p th:text="${session.message.content}"></p>-->
+<!--               <th:block th:text="${#session.removeAttribute('message')}"></th:block>-->
+<!--           </div>-->
+           <div th:if="${success}" th:text="${success}" class="alert alert-primary text-center" role="alert">
+               A simple primary alert—check it out!
+           </div>
+          <div class="container text-center">
+              <img  style="width:80px;" src="" th:src="@{/image/membership.png}"/>
+          </div>
+
+           <form novalidate action="" th:action="@{/do_register}" method="post" th:object="${user}">
+
+               <h1 class="text-center">Register Here!!</h1>
+<!--               Name Field-->
+               <div  class="mb-3">
+                   <label for="name_field" class="form-label ">Your Name</label>
+                   <input  name="name" type="text" class="form-control"   th:classappend="${#fields.hasErrors('name')? 'is-invalid':''}" id="name_field"   placeholder="Enter Here..." required aria-describedby="emailHelp" th:value="${user.name}">
+
+                   <div th:each="e:${#fields.errors('name')}" th:text="${e}" id="validationServer03Feedback" class="invalid-feedback">
+
+                   </div>
+               </div>
+
+               <!--               Email Field-->
+               <div class="mb-3">
+                   <label for="email_field" class="form-label">Your Email</label>
+                   <input name="email" type="email" class="form-control" id="email_field"  placeholder="Enter Here..." required aria-describedby="emailHelp" th:value="${user.email}">
+
+               </div>
+
+               <!--               Password Field-->
+               <div class="mb-3">
+                   <label for="password_field" class="form-label">Your Password</label>
+                   <input  name="password" type="Password" class="form-control" id="password_field"  placeholder="Enter Here..." required aria-describedby="emailHelp">
+
+               </div>
+
+<!--             User About Field-->
+
+               <div class="form-group">
+                   <textarea name="about"  th:value="${user.about}"  placeholder="Enter Somethings YourSelf" rows="6" class="form-control"></textarea>
+               </div>
+<!--             Terms and Condition-->
+               <div class="form-group form-check">
+                   <input type="checkbox" name="agreement" class="form-check-input" id="agreement"/>
+                   <label for="agreement">Accept terms and Conditions</label>
+               </div>
+
+            <div class="container  text-center mt-2 ">
+             <button  type="submit" class="btn bg-primary  text-white">
+                 Submit
+             </button>
+                <button  type="reset" class="btn btn-warning  text-white">
+                    Reset
+                </button>
+            </div>
+
+           </form>
+
+
+
+       </div>
+
+        </div>
+
+    </div>
+</div>
+</section>
+
+
+</body>
+</html>
